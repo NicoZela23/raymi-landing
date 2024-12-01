@@ -10,8 +10,10 @@ github-sync:
     - apk add --no-cache git openssh-client
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    # Echo the private key with proper line breaks
-    - echo "$GITHUB_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa
+    # Write key file differently
+    - echo "-----BEGIN OPENSSH PRIVATE KEY-----" > ~/.ssh/id_rsa
+    - echo "$GITHUB_PRIVATE_KEY" >> ~/.ssh/id_rsa
+    - echo "-----END OPENSSH PRIVATE KEY-----" >> ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     - ssh-keyscan github.com >> ~/.ssh/known_hosts
     - git config --global user.email "${GITLAB_USER_EMAIL}"
