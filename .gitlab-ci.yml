@@ -10,8 +10,8 @@ github-sync:
     - apk add --no-cache git openssh-client
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - printf "$GITHUB_PRIVATE_KEY" > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
+    - eval $(ssh-agent -s)
+    - echo "$GITHUB_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - ssh-keyscan github.com >> ~/.ssh/known_hosts
     - git config --global user.email "${GITLAB_USER_EMAIL}"
     - git config --global user.name "${GITLAB_USER_NAME}"
