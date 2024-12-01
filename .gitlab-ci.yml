@@ -1,0 +1,22 @@
+# .gitlab-ci.yml
+variables:
+  GIT_DEPTH: "0"
+
+github-sync:
+  stage: deploy
+  image: alpine:latest
+  only:
+    - main # or your default branch name
+  before_script:
+    - apk add --no-cache git openssh-client
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$GITHUB_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan github.com >> ~/.ssh/known_hosts
+    - git config --global user.email "${GITLAB_USER_EMAIL}"
+    - git config --global user.name "${GITLAB_USER_NAME}"
+  script:
+    - git remote add github git@github.com:NicoZela23/raymi-landing.git
+    - git fetch github
+    - git push -f github HEAD:main
