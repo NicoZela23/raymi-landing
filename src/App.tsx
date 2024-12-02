@@ -14,7 +14,7 @@ useTexture.preload(
 );
 
 function App() {
-  const { debug } = useControls({ debug: true });
+  const { debug } = useControls({ debug: false });
   return (
     <Canvas camera={{ position: [0, 0, 13], fov: 25 }}>
       <Scene debug={debug} />
