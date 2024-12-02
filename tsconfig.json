@@ -1,5 +1,22 @@
 {
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "jsx": "react",
+    "allowJs": true,
+    "checkJs": false,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    
+  },
   "files": [],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.jsx"  // Add this to include JSX files
+  ],
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
